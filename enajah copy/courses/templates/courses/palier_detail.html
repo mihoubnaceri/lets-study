@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid">
+  <div class="container">
+<h1 class="text-center">{{ palier.title }}</h1>
+    <div class="row">
+{% for module in palier.related_module.all %}
+  <div class="col-sm-4">
+  <div class="card" style="width: 18rem;margin-bottom:10px;">
+
+    <div class="card-body">
+      <h5 class="card-title">{{ module.title }}</h5>
+      <p class="card-text">{{ module.description|truncatechars:70 }}</p>
+      <a href="{% url 'courses:module_detail' palier_slug=palier.palier_slug module_slug=module.module_slug  %}" class="btn btn-primary">Enroll</a>
+    </div>
+</div>
+</div>
+  {% empty %}
+  <h3>Pardon ya pas de cours ici </h3>
+
+{% endfor %}
+</div>
+</div>
+</div>
+{% endblock %}

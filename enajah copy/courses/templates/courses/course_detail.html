@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid">
+  <div class="container">
+    <h1 style="font-size:50px;"> {{ cours.title }}</h1>
+
+      <a class="btn btn-primary" data-toggle="collapse" href="#t1" role="button" aria-expanded="false" aria-controls="collapseExample" style="margin:5px;">
+        <h4 >Trimestre 1 </h4>
+      </a>
+      <div class="collapse" id="t1">
+    {% for course in c1 %}
+
+      <div class="card card-body">
+         {{ course.title }}<a href="{% url 'courses:tutos_list' palier_slug=palier.palier_slug module_slug=cours.module_slug course_slug=course.course_slug  %}">Start!</a>
+      </div>
+      {% empty %}
+      <p> Pas de cours Encore a venir ´)</p>
+    {% endfor %}
+    </div>
+    <a class="btn btn-primary" data-toggle="collapse" href="#t2" role="button" aria-expanded="false" aria-controls="collapseExample" style="margin:5px;">
+      <h4>Trimestre 2 </h4>
+    </a>
+      <div class="collapse" id="t2">
+    {% for course in c2 %}
+
+    <div class="card card-body">
+      {{ course.title }} <a href="{% url 'courses:tutos_list' palier_slug=palier.palier_slug module_slug=cours.module_slug course_slug=course.course_slug  %}">Start!</a>
+    </div>
+      {% empty %}
+      <p> Pas de cours Encore a venir ´)</p>
+    {% endfor %}
+  </div>
+  <a class="btn btn-primary" data-toggle="collapse" href="#t3" role="button" aria-expanded="false" aria-controls="collapseExample" style="margin:5px;">
+    <h4>Trimestre 3 </h4>
+  </a>
+    <div class="collapse" id="t3">
+  {% for course in c3 %}
+
+  <div class="card card-body">
+    {{ course.title }}<a href="{% url 'courses:tutos_list' palier_slug=palier.palier_slug module_slug=cours.module_slug course_slug=course.course_slug  %}">Start!</a>
+  </div>
+    {% empty %}
+    <p> Pas de cours Encore a venir ´)</p>
+  {% endfor %}
+</div>
+  </div>
+</div>
+{% endblock %}

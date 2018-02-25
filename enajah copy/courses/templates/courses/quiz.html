@@ -1,0 +1,53 @@
+
+
+
+
+<div class="container text-center">
+  There are {{ counter}} Questions Go head!
+  {% for  question in paginate_quiz %}
+  <form method="post" action="" id="quiz">{% csrf_token %}
+      <h4>{{ question.question_text }}</h3>
+            {% if question.question_type == "qcm" or question.question_type == "tf"  %}
+              {% for  answer in question.related_answer.all %}
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+
+                      <div class="input-group-text">
+                        <input type="radio" aria-label="Checkbox for following text input" name="choice" value="{{ answer.answer_text }}">{{ answer.answer_text }}
+                      </div>
+                        <span class="input-group-text"><h4></h4></span>
+                    </div>
+
+                  </div>
+                {% endfor %}
+              {% else %}
+              <div class="form-group">
+                <label for="exampleFormControlTextarea1">reponse</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+              </div>
+              {%endif %}
+          <input type="submit" value="Repondre">
+          </form>
+  {% endfor %}
+  <div class="pagination  text-center">
+      <span class="step-links  text-center">
+          {% if paginate_quiz.has_previous %}
+              <a href="?question=1">&laquo; first</a>
+
+              <button type="button" class="btn btn-primary"><a href="?question={{ paginate_quiz.previous_page_number }}" style="color:white;">Avant</a></button>
+          {% endif %}
+
+          {% if paginate_quiz.count > 1  %}
+          <span class="current">
+              page {{ paginate_quiz.number }} sur {{ paginate_quiz.paginator.num_pages }}.
+          </span>
+          {% endif %}
+          {% if paginate_quiz.has_next %}
+              <button type="button" class="btn btn-primary"><a href="?question={{ paginate_quiz.next_page_number }}" style="color:white;">Suivant</a></button>
+          {% endif %}
+          {% if paginate_quiz.has_next == False %}
+              <button type="button" class="btn btn-primary"><a href="" style="color:white;">it is over!</a></button>
+          {% endif %}
+      </span>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'courses:palier_detail' palier_slug=palier.palier_slug %}">Palier</a></li>
+
+    <li class="breadcrumb-item"><a href="{% url 'courses:course_detail' palier_slug=palier.palier_slug module_slug=module.module_slug %}">{{ module.title }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ tutorials.title }}</li>
+  </ol>
+</nav>
+<div class="container">
+<h1 class="text-center"><a> {{ tutorials.title }}</a></h1>
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"><span class="badge badge-pill badge-primary">Videos|{{counter_video}}</span></h5>
+          <hr>
+
+        {% for video in videos %}
+
+        <a href="{% url 'courses:tutos_detail' palier_slug=palier.palier_slug module_slug=module.module_slug course_slug=tutorials.course_slug tutorial_slug=video.tutorial_slug %}"><p class="card-text">{{video.title}}</p></a>
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"><span class="badge badge-pill badge-primary">Quizzes|{{ counter }}</span></h5>
+        <hr>
+        {% for quiz in quizzes %}
+          <a href="{% url 'courses:tutos_detail' palier_slug=palier.palier_slug module_slug=module.module_slug course_slug=tutorials.course_slug tutorial_slug=quiz.tutorial_slug %}"><p class="card-text">{{quiz.title}}</p></a>
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+
+
+</div>
+  
+
+  <a href="{% url 'courses:tutos_detail' palier_slug=palier.palier_slug module_slug=module.module_slug course_slug=tutorials.course_slug tutorial_slug=first_item.tutorial_slug  %}" >start</a>
+
+</div>
+
+{% endblock %}
