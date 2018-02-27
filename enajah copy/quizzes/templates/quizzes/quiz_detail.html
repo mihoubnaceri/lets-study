@@ -20,14 +20,27 @@
                 {% endfor %}
               {% else %}
               <div class="form-group">
-                <label for="exampleFormControlTextarea1">reponse</label>
+                <label for="exampleFormControlTextarea1">Check</label>
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
               </div>
               {%endif %}
-          <input type="submit" value="Repondre">
+
+
+              {% if correct %}
+              <a tabindex="0" class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-trigger="focus" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">Correct</a>
+                {% if paginate_quiz.has_next %}
+                  <button type="button" class="btn btn-primary"><a href="?question={{ paginate_quiz.next_page_number }}" style="color:white;">{{ button }}</a></button>
+                {% else %}
+                <a tabindex="0" class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-trigger="focus" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">Results!</a>
+              {% endif %}
+              {% else %}
+              <input class="btn btn-outline-success" type="submit" value="Check" {% if correct %}data-toggle="popover"{%endif%}>
+            {% endif %}
+
           </form>
+
   {% endfor %}
-  <div class="pagination  text-center">
+  <!-- <div class="pagination  text-center">
       <span class="step-links  text-center">
           {% if paginate_quiz.has_previous %}
               <a href="?question=1">&laquo; first</a>
@@ -47,6 +60,7 @@
               <button type="button" class="btn btn-primary"><a href="" style="color:white;">it is over!</a></button>
           {% endif %}
       </span>
-  </div>
+  </div> -->
 </div>
+
 {% endblock %}

@@ -9,5 +9,7 @@ urlpatterns = [
     path("<palier_slug>/<module_slug>/<course_slug>/",views.tutorials,name="tutos_list"),
     path("<palier_slug>/<module_slug>/<course_slug>/<tutorial_slug>/",views.lesson,name="tutos_detail"),
     path("<palier_slug>/404/",views.four,name="404"),
+    
+
     #path("<palier_slug>/<module_slug>/<course_slug>/<tutorial_slug>",views.tutorial_detail,name="tutorials"),
 ]

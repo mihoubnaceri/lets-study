@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+  {% for utilisateur in users %}
+    <li><a href="{% url 'accounts:profile' username=utilisateur.username %}">{{ utilisateur.username }}</a></li>
+  {% endfor %}
+{% endblock %}

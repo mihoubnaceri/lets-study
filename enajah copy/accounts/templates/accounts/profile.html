@@ -1,12 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container text-center">
-<div class="card" style="width: 18rem;">
-  <img class="card-img-top text-center" style="height:100px;border:2px solid blue;border-radius:10%;width:18.5rem;" src="http://lorempixel.com/400/200/sports/1/" alt="Card image cap">
+
+
+<div class="card mb-3">
+
   <div class="card-body">
-    <h5 class="card-title">{{ user.username }}</h5>
-    <p class="card-text">I like weirdos</p>
-    <a href="#" class="btn btn-primary">Abonnee</a>
+    <h2 class="card-title">{{ user.first_name }} {{ user.last_name }}</h2>
+    <hr>
+
+    <h3>{{ user.username }}</h3>
+    <p class="card-text">{{ user.user.bio  }}</p>
+    <h1> Enrolled Classes </h1>
+    {% for class in user.enrolled_palier.all %}
+      <h4><span class="badge badge-pill badge-danger">{{ class }}</span></h4>
+    {% endfor %}
+    <span class="badge badge-pill badge-danger">{{ user.user.points }}</span>
   </div>
 </div>
 </div>

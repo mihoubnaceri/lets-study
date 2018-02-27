@@ -5,7 +5,7 @@ from videos.models import Video
 
 class TutorialInline(admin.TabularInline):
     model = Tutorial
-    fields = ('title','video','quiz')
+    fields = ('order','title','video','quiz')
 
 class CourseAdmin(admin.ModelAdmin):
     inlines = [TutorialInline]

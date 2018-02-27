@@ -3,7 +3,7 @@
   {% if form_error %}
   <p>Utilisateur existse deja ou email</p>
   {% endif %}
-  
+
     <form class="form-inline" method="POST">{% csrf_token %}
       <label class="sr-only" for="inlineFormInputName2">{{ form.email.label }}</label>
       <input type="email" name="email" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Emaiiil">

@@ -4,7 +4,7 @@ from .models import Quiz,Question,Indice,Answer
 
 class QuestionInline(admin.TabularInline):
     model = Question
-    fields = ("question_type","question_text",)
+    fields = ("order","question_type","question_text",)
 
 class IndiceInline(admin.TabularInline):
     model = Indice

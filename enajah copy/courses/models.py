@@ -2,14 +2,21 @@ from django.db import models
 from django.utils.text import slugify
 from django.urls import reverse
 # Create your models here.
+from django.contrib.auth.models import User
 from videos.models import Video
 from quizzes.models import Quiz
+from django.db.models.signals import pre_save, post_save
+from django.urls import reverse
+
+
+
 
 class Palier(models.Model):
+    student = models.ManyToManyField(User,related_name="enrolled_palier")
     title = models.CharField(max_length=200)
     palier_slug = models.SlugField(blank=True,unique=True)
-
-
+    enrolled = models.BooleanField(default=False)
+    #enrolled_on = models.DateField()
     def save(self, *args, **kwargs):
         self.palier_slug = slugify(self.title)
         super(Palier, self).save(*args, **kwargs)
@@ -39,6 +46,7 @@ TRIMESTRE = (
 )
 class Course(models.Model):
     module = models.ForeignKey(Module,on_delete=models.CASCADE,related_name="related_course")
+    order = models.IntegerField(default=0)
     title = models.CharField(max_length=200)
     trimestre = models.CharField(max_length=20,choices=TRIMESTRE)
     course_slug = models.SlugField(unique=True,blank=True)
@@ -54,6 +62,7 @@ class Tutorial(models.Model):
     course = models.ForeignKey(Course,on_delete=models.CASCADE,related_name="related_tutorial")
     title = models.CharField(max_length=200)
     tutorial_slug = models.SlugField(blank=True,unique=True)
+    order = models.IntegerField(default=0)
     video = models.ForeignKey(Video,on_delete=models.CASCADE,null=True,blank=True)
     quiz = models.ForeignKey(Quiz,on_delete=models.CASCADE,null=True,blank=True)
 
@@ -61,6 +70,6 @@ class Tutorial(models.Model):
         self.tutorial_slug = slugify(self.title)
         super(Tutorial, self).save(*args, **kwargs)
     def get_absolute_url(self):
-        return reverse('courses:tutorialst', kwargs={"tutorial_slug":self.tutorial_slug})
+        return reverse('courses:tutos_detail', kwargs={"tutorial_slug":self.tutorial_slug})
     def __str__(self):
         return self.title

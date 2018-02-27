@@ -23,9 +23,24 @@
      <li class="nav-item">
       <a class="nav-link" href="{% url 'accounts:logout' %}">Deconnexion</a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ user.username }}
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <a class="dropdown-item" href="{% url 'accounts:profile' username=user.username  %}">Profile</a>
+        <a class="dropdown-item" href="{% url 'accounts:logout'  %}">Deconnexion</a>
+        <a class="dropdown-item" href="{% url 'accounts:users'  %}">Users</a>
+        <a class="dropdown-item" href="{% url 'accounts:edit' username=user.username  %}">modifier profile</a>
+        {% if user.is_staff %}
+            <a class="dropdown-item" href="">Ajouter Cours</a>
+        {% endif %}
+
+      </div>
+    </li>
+    <!-- <li class="nav-item">
      <a class="nav-link" href="{% url 'accounts:profile' username=user.username %}">Profile</a>
-   </li>
+   </li> -->
     {% else %}
     <li class="nav-item">
      <a class="nav-link" href="{% url 'accounts:login' %}">Connexion</a>

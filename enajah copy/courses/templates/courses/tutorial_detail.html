@@ -13,9 +13,21 @@
   {% include "courses/quiz.html" %}
   {% else %}
   {{ lesson.title }}<br>
+  {% if lesson_prev  %}
+    < -- <a href="{% url 'courses:tutos_detail' palier_slug=palier.palier_slug module_slug=module.module_slug course_slug=course.course_slug tutorial_slug=lesson_prev.tutorial_slug %}"> {{ lesson_prev }} </a>
+  {% endif %}
   {{ lesson.video.embed_code|safe }}
-
 {% endif %}
+
+{% if lesson_next  %}
+  <a href="{% url 'courses:tutos_detail' palier_slug=palier.palier_slug module_slug=module.module_slug course_slug=course.course_slug tutorial_slug=lesson_next.tutorial_slug %}"> {{ lesson_next }} --> </a>
+  {% else %}
+
+  {% if course_next%}
+    <a href="{% url 'courses:tutos_list' palier_slug=palier.palier_slug module_slug=module.module_slug course_slug=course_next.course_slug  %}"> {{ course_next }} --
+    {% endif %}
+{% endif %}
+
 </div>
 </div>
 
